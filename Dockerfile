@@ -16,7 +16,8 @@ COPY package*.json ./
 COPY .npmrc ./
 
 # Install all dependencies first (including dev dependencies for build)
-RUN npm ci
+# Use npm install instead of npm ci to handle version mismatches
+RUN npm install
 
 # Rebuild lightningcss for the current platform
 RUN npm rebuild lightningcss
@@ -28,7 +29,7 @@ COPY . .
 RUN npm run build
 
 # Remove dev dependencies after build
-RUN npm ci --omit=dev
+RUN npm prune --omit=dev
 
 # Expose port
 EXPOSE 3000
