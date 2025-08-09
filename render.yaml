@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: calculate-app
+    env: node
+    plan: free
+    buildCommand: |
+      # Clean install with platform-specific binaries
+      npm ci --platform=linux --arch=x64
+      # Force rebuild lightningcss for Linux
+      npm rebuild lightningcss
+      # Build the application
+      npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRES_IN
+        value: "3600"
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DB
+        value: employee-time-tracking
+    autoDeploy: false
+    buildFilter:
+      paths:
+        - src/**
+        - package.json
+        - package-lock.json
+        - postcss.config.mjs
+        - tsconfig.json
+        - .npmrc
+        - render.yaml
+    healthCheckPath: /
