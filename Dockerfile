@@ -15,8 +15,8 @@ RUN apk add --no-cache \
 COPY package*.json ./
 COPY .npmrc ./
 
-# Install dependencies with platform-specific binaries
-RUN npm ci --only=production --platform=linux --arch=x64
+# Install all dependencies first (including dev dependencies for build)
+RUN npm ci
 
 # Rebuild lightningcss for the current platform
 RUN npm rebuild lightningcss
@@ -26,6 +26,9 @@ COPY . .
 
 # Build the application
 RUN npm run build
+
+# Remove dev dependencies after build
+RUN npm ci --omit=dev
 
 # Expose port
 EXPOSE 3000
