@@ -25,6 +25,9 @@ RUN npm rebuild lightningcss
 # Copy source code
 COPY . .
 
+# Set dummy MongoDB URI for build time (prevents build errors)
+ENV MONGODB_URI=mongodb://dummy:27017/dummy
+
 # Build the application
 RUN npm run build
 
