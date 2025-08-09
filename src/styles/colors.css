@@ -1,0 +1,120 @@
+/* =================================
+   CENTRALIZED COLOR SYSTEM
+   Change all colors from this file
+   ================================= */
+
+:root {
+  /* === PRIMARY COLORS === */
+  --primary-bg: #0f1419;           /* Main dark background */
+  --secondary-bg: #1a2332;         /* Secondary background */
+  --card-bg: #233044;              /* Card background */
+  --input-bg: #2d3748;             /* Input field background */
+  
+  /* === ACCENT COLORS === */
+  --primary-accent: #00d4aa;        /* Main teal/green accent */
+  --primary-accent-hover: #00b894;  /* Hover state for accent */
+  --primary-accent-light: #4fd1c7;  /* Light accent variant */
+  --primary-accent-dark: #009688;   /* Dark accent variant */
+  
+  /* === TEXT COLORS === */
+  --text-primary: #ffffff;          /* Primary text (white) */
+  --text-secondary: #a0aec0;        /* Secondary text (light gray) */
+  --text-muted: #718096;            /* Muted text */
+  --text-accent: #00d4aa;           /* Accent text color */
+  
+  /* === BORDER COLORS === */
+  --border-primary: #00d4aa;        /* Primary border (teal) */
+  --border-secondary: #2d3748;      /* Secondary border */
+  --border-muted: #4a5568;          /* Muted border */
+  
+  /* === STATE COLORS === */
+  --success: #48bb78;               /* Success state */
+  --error: #f56565;                 /* Error state */
+  --warning: #ed8936;               /* Warning state */
+  --info: #4299e1;                  /* Info state */
+  
+  /* === BUTTON COLORS === */
+  --btn-primary-bg: #00d4aa;        /* Primary button background */
+  --btn-primary-text: #0f1419;      /* Primary button text */
+  --btn-primary-hover: #00b894;     /* Primary button hover */
+  
+  --btn-secondary-bg: transparent;   /* Secondary button background */
+  --btn-secondary-text: #00d4aa;     /* Secondary button text */
+  --btn-secondary-border: #00d4aa;   /* Secondary button border */
+  --btn-secondary-hover: #00d4aa;    /* Secondary button hover bg */
+  
+  /* === SHADOW COLORS === */
+  --shadow-light: rgba(0, 212, 170, 0.1);   /* Light shadow with accent */
+  --shadow-medium: rgba(0, 212, 170, 0.2);  /* Medium shadow with accent */
+  --shadow-dark: rgba(0, 0, 0, 0.3);        /* Dark shadow */
+  
+  /* === GRADIENT COLORS === */
+  --gradient-primary: linear-gradient(135deg, #00d4aa 0%, #009688 100%);
+  --gradient-secondary: linear-gradient(135deg, #233044 0%, #1a2332 100%);
+  
+  /* === OPACITY VARIANTS === */
+  --accent-10: rgba(0, 212, 170, 0.1);
+  --accent-20: rgba(0, 212, 170, 0.2);
+  --accent-30: rgba(0, 212, 170, 0.3);
+  --accent-50: rgba(0, 212, 170, 0.5);
+  
+  /* === FOCUS COLORS === */
+  --focus-ring: 0 0 0 3px var(--accent-20);
+  --focus-border: var(--primary-accent);
+}
+
+/* =================================
+   DARK THEME VARIANTS (Optional)
+   ================================= */
+[data-theme="dark"] {
+  --primary-bg: #000000;
+  --secondary-bg: #111111;
+  --card-bg: #1a1a1a;
+}
+
+/* =================================
+   LIGHT THEME VARIANTS (Optional)
+   ================================= */
+[data-theme="light"] {
+  --primary-bg: #ffffff;
+  --secondary-bg: #f7fafc;
+  --card-bg: #ffffff;
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --border-secondary: #e2e8f0;
+}
+
+/* =================================
+   CUSTOM COLOR SCHEMES
+   Uncomment and modify as needed
+   ================================= */
+
+/* Blue Theme */
+/*
+:root {
+  --primary-accent: #3182ce;
+  --primary-accent-hover: #2c5282;
+  --border-primary: #3182ce;
+  --text-accent: #3182ce;
+}
+*/
+
+/* Purple Theme */
+/*
+:root {
+  --primary-accent: #805ad5;
+  --primary-accent-hover: #6b46c1;
+  --border-primary: #805ad5;
+  --text-accent: #805ad5;
+}
+*/
+
+/* Red Theme */
+/*
+:root {
+  --primary-accent: #e53e3e;
+  --primary-accent-hover: #c53030;
+  --border-primary: #e53e3e;
+  --text-accent: #e53e3e;
+}
+*/
