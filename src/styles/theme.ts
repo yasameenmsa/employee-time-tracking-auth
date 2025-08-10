@@ -29,9 +29,13 @@ export interface ThemeColors {
   
   // State Colors
   success: string;
+  successLight: string;
   error: string;
+  errorLight: string;
   warning: string;
+  warningLight: string;
   info: string;
+  infoLight: string;
   
   // Shadow Colors
   shadowColor: string;
@@ -124,9 +128,13 @@ export const defaultTheme: Theme = {
     
     // State Colors
     success: '#48bb78',
+    successLight: '#9ae6b4',
     error: '#f56565',
+    errorLight: '#feb2b2',
     warning: '#ed8936',
+    warningLight: '#fbd38d',
     info: '#4299e1',
+    infoLight: '#90cdf4',
     
     // Shadow Colors
     shadowColor: '#000000',

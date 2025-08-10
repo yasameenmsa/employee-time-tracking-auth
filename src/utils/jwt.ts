@@ -5,6 +5,7 @@ export type JwtPayload = {
   userId: string;
   username: string;
   email?: string;
+  role?: string;
   iat?: number;
   exp?: number;
 };
@@ -12,7 +13,7 @@ export type JwtPayload = {
 export function parseAuthCookie(cookieHeader: string | null): string | null {
   if (!cookieHeader) return null;
   const cookies = parseCookie(cookieHeader);
-  return cookies.authToken || null;
+  return cookies['auth-token'] || null;
 }
 
 export function verifyJwt(token: string): JwtPayload | null {

@@ -34,7 +34,7 @@ export async function POST(request: Request) {
       }
     });
     
-    response.cookies.set("authToken", token, {
+    response.cookies.set("auth-token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Enable HTTPS in the production environment
       sameSite: "lax", // Prevent CSRF attacks

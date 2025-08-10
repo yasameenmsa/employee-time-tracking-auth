@@ -29,7 +29,25 @@ export default function LoginPage() {
       const data = await response.json();
 
       if (response.ok) {
-        router.push('/dashboard');
+        // Redirect based on user role
+        const userRole = data.user?.role;
+        let redirectPath = '/dashboard'; // fallback
+        
+        switch (userRole) {
+          case 'admin':
+            redirectPath = '/admin';
+            break;
+          case 'HR':
+            redirectPath = '/hr';
+            break;
+          case 'employees':
+            redirectPath = '/employee';
+            break;
+          default:
+            redirectPath = '/dashboard';
+        }
+        
+        router.push(redirectPath);
       } else {
         setError(data.error || 'فشل في تسجيل الدخول');
       }
