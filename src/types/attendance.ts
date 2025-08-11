@@ -83,6 +83,11 @@ export interface AttendanceStats {
   weekly_hours: number;
   monthly_hours: number;
   average_daily_hours: number;
+  total_employees: number;
+  present_today: number;
+  absent_today: number;
+  late_today: number;
+  average_hours: number;
 }
 
 export interface TimeCalculation {

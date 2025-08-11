@@ -4,6 +4,10 @@ import { attendanceService } from '@/utils/attendanceService';
 import { CheckInRequest, CheckInResponse, AttendanceError } from '@/types/attendance';
 
 export async function POST(request: NextRequest) {
+  let body: CheckInRequest | undefined;
+  let userId: string | undefined;
+  let role: string | undefined;
+  
   try {
     // Parse and verify JWT token
     const authResult = await authenticateRequest(request);
@@ -14,11 +18,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { userId, role } = authResult.payload;
+    ({ userId, role } = authResult.payload);
 
     // Parse request body
-    const body: CheckInRequest = await request.json();
-    const { employee_id, timestamp } = body;
+    body = await request.json();
+    const { employee_id, timestamp } = body || {};
 
     // Validate employee_id is provided
     if (!employee_id) {

@@ -9,6 +9,7 @@ export interface ThemeColors {
   cardBg: string;
   inputBg: string;
   headerBg: string;
+  footerBg: string;
   
   // Accent Colors
   primaryAccent: string;
@@ -35,8 +36,10 @@ export interface ThemeColors {
   errorLight: string;
   warning: string;
   warningLight: string;
+  warningDark: string;
   info: string;
   infoLight: string;
+  infoDark: string;
   
   // Shadow Colors
   shadowColor: string;
@@ -109,6 +112,7 @@ export const defaultTheme: Theme = {
     cardBg: '#233044',
     inputBg: '#2d3748',
     headerBg: '#1a2332',
+    footerBg: '#1a2332',
     
     // Accent Colors
     primaryAccent: '#00d4aa',
@@ -135,8 +139,10 @@ export const defaultTheme: Theme = {
     errorLight: '#feb2b2',
     warning: '#ed8936',
     warningLight: '#fbd38d',
+    warningDark: '#c05621',
     info: '#4299e1',
     infoLight: '#90cdf4',
+    infoDark: '#3182ce',
     
     // Shadow Colors
     shadowColor: '#000000',

@@ -236,7 +236,12 @@ export class AttendanceService {
       daily_hours: dailyHours,
       weekly_hours: weeklyHours,
       monthly_hours: monthlyHours,
-      average_daily_hours: Math.round(averageDailyHours * 100) / 100
+      average_daily_hours: Math.round(averageDailyHours * 100) / 100,
+      total_employees: 0,
+      present_today: 0,
+      absent_today: 0,
+      late_today: 0,
+      average_hours: Math.round(averageDailyHours * 100) / 100
     };
   }
 

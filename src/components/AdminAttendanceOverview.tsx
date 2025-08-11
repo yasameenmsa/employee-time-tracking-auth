@@ -11,7 +11,13 @@ interface AdminAttendanceOverviewProps {
 
 interface OverviewState {
   employees: EmployeeAttendanceSummary[];
-  summary: AttendanceStats;
+  summary: {
+    total_employees: number;
+    checked_in_count: number;
+    checked_out_count: number;
+    average_hours_today: number;
+    total_hours_today: number;
+  };
   loading: boolean;
   error: string | null;
   selectedDate: string;
@@ -26,10 +32,10 @@ export default function AdminAttendanceOverview({ className = '' }: AdminAttenda
     employees: [],
     summary: {
       total_employees: 0,
-      present_today: 0,
-      absent_today: 0,
-      late_today: 0,
-      average_hours: 0
+      checked_in_count: 0,
+      checked_out_count: 0,
+      average_hours_today: 0,
+      total_hours_today: 0
     },
     loading: true,
     error: null,
@@ -74,11 +80,11 @@ export default function AdminAttendanceOverview({ className = '' }: AdminAttenda
   // Filter employees based on search term
   const filteredEmployees = state.employees.filter(employee =>
     employee.employee_name.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
-    employee.department.toLowerCase().includes(state.searchTerm.toLowerCase())
+    (employee.department && employee.department.toLowerCase().includes(state.searchTerm.toLowerCase()))
   );
 
   // Format time
-  const formatTime = (timeString: string | null) => {
+  const formatTime = (timeString: string | null | undefined) => {
     if (!timeString) return '--';
     return new Date(timeString).toLocaleTimeString('en-US', {
       hour: '2-digit',
@@ -120,8 +126,8 @@ export default function AdminAttendanceOverview({ className = '' }: AdminAttenda
       emp.department,
       formatTime(emp.check_in_time),
       formatTime(emp.check_out_time),
-      emp.hours_worked ? formatHours(emp.hours_worked) : '--',
-      emp.status
+      emp.today_hours ? formatHours(emp.today_hours) : '--',
+      emp.current_status
     ]);
 
     const csvContent = [headers, ...csvData]
@@ -235,19 +241,19 @@ export default function AdminAttendanceOverview({ className = '' }: AdminAttenda
             <div className="text-sm text-gray-500">إجمالي الموظفين</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-green-600">{state.summary.present_today}</div>
+            <div className="text-2xl font-bold text-green-600">{state.summary.checked_in_count}</div>
             <div className="text-sm text-gray-500">حاضر اليوم</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-red-600">{state.summary.absent_today}</div>
+            <div className="text-2xl font-bold text-red-600">{state.summary.total_employees - state.summary.checked_in_count}</div>
             <div className="text-sm text-gray-500">غائب اليوم</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-yellow-600">{state.summary.late_today}</div>
+            <div className="text-2xl font-bold text-yellow-600">0</div>
             <div className="text-sm text-gray-500">متأخر اليوم</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-blue-600">{formatHours(state.summary.average_hours)}</div>
+            <div className="text-2xl font-bold text-blue-600">{formatHours(state.summary.average_hours_today)}</div>
             <div className="text-sm text-gray-500">متوسط الساعات</div>
           </div>
         </div>
@@ -302,7 +308,7 @@ export default function AdminAttendanceOverview({ className = '' }: AdminAttenda
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">
-                        {employee.hours_worked ? formatHours(employee.hours_worked) : '--'}
+                        {employee.today_hours ? formatHours(employee.today_hours) : '--'}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">

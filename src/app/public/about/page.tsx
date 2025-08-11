@@ -23,8 +23,8 @@ export default function AboutPage() {
                 href="/"
                 className="px-4 py-2 rounded-lg font-medium transition-colors"
                 style={{ color: themeStyles.colors.textSecondary }}
-                onMouseEnter={(e) => e.target.style.color = themeStyles.colors.primaryAccent}
-                onMouseLeave={(e) => e.target.style.color = themeStyles.colors.textSecondary}
+                onMouseEnter={(e) => (e.target as HTMLElement).style.color = themeStyles.colors.primaryAccent}
+                onMouseLeave={(e) => (e.target as HTMLElement).style.color = themeStyles.colors.textSecondary}
               >
                 الرئيسية
               </Link>
