@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Users, Settings, BarChart3, DollarSign, Clock, Shield, Database, FileText, UserPlus, Calendar, TrendingUp, AlertCircle } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
 import LogoutButton from '@/components/ui/LogoutButton';
+import AdminAttendanceOverview from '@/components/AdminAttendanceOverview';
 import { useThemeStyles } from '@/contexts/ThemeContext';
 
 interface User {
@@ -315,6 +316,9 @@ export default function AdminDashboard() {
               </div>
             </div>
           </div>
+
+          {/* Attendance Overview */}
+          <AdminAttendanceOverview className="mb-8 xl:mb-12 2xl:mb-16" />
 
           {/* Management Cards */}
           <div className="mb-8 xl:mb-12 2xl:mb-16">

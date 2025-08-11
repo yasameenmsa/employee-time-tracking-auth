@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Clock, Calendar, FileText, User, BarChart3, CheckCircle, AlertCircle, TrendingUp, Target, Award } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
 import LogoutButton from '@/components/ui/LogoutButton';
+import AttendanceWidget from '@/components/AttendanceWidget';
 import { useThemeStyles } from '@/contexts/ThemeContext';
 
 interface User {
@@ -194,39 +195,11 @@ export default function EmployeeDashboard() {
         </div>
 
         <div className="max-w-7xl mx-auto p-6 sm:p-8 xl:p-12 2xl:p-16">
-          {/* Clock In/Out Section */}
-          <div style={{ backgroundColor: themeStyles.colors.cardBg, borderColor: themeStyles.colors.borderSecondary }} className="backdrop-blur-sm rounded-2xl p-6 sm:p-8 xl:p-10 2xl:p-12 shadow-lg border mb-8 xl:mb-12">
-            <div className="text-center">
-              <h2 style={{ color: themeStyles.colors.textPrimary }} className="text-2xl sm:text-3xl xl:text-4xl font-bold mb-6 xl:mb-8">تسجيل الحضور والانصراف</h2>
-              <div className="flex flex-col items-center space-y-6 xl:space-y-8">
-                <div style={{ backgroundColor: isClocked ? themeStyles.colors.successLight : themeStyles.colors.dangerLight, borderColor: isClocked ? themeStyles.colors.success : themeStyles.colors.danger }} className="w-32 h-32 sm:w-40 sm:h-40 xl:w-48 xl:h-48 rounded-full flex items-center justify-center border-4 transition-all duration-500">
-                  <Clock style={{ color: isClocked ? themeStyles.colors.success : themeStyles.colors.danger }} className="w-16 h-16 sm:w-20 sm:h-20 xl:w-24 xl:h-24" />
-                </div>
-                <div className="text-center">
-                  <p style={{ color: themeStyles.colors.textSecondary }} className="text-lg sm:text-xl xl:text-2xl mb-2">
-                    {isClocked ? 'أنت مسجل حضور حالياً' : 'لم تسجل حضورك بعد'}
-                  </p>
-                  {todayEntry && (
-                    <div style={{ color: themeStyles.colors.textSecondary }} className="text-sm sm:text-base xl:text-lg">
-                      {todayEntry.clockIn && (
-                        <p>وقت الحضور: {todayEntry.clockIn}</p>
-                      )}
-                      {todayEntry.clockOut && (
-                        <p>وقت الانصراف: {todayEntry.clockOut}</p>
-                      )}
-                    </div>
-                  )}
-                </div>
-                <button
-                  onClick={handleClockInOut}
-                  style={{ backgroundColor: isClocked ? themeStyles.colors.danger : themeStyles.colors.success, color: themeStyles.colors.btnPrimaryText }}
-                  className="px-8 sm:px-12 xl:px-16 py-4 xl:py-6 rounded-xl font-bold text-lg sm:text-xl xl:text-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
-                >
-                  {isClocked ? 'تسجيل الانصراف' : 'تسجيل الحضور'}
-                </button>
-              </div>
-            </div>
-          </div>
+          {/* Attendance Widget */}
+          <AttendanceWidget 
+            employeeId={user.id} 
+            className="mb-8 xl:mb-12"
+          />
 
           {/* Weekly Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8 mb-8 xl:mb-12">

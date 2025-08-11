@@ -227,7 +227,7 @@ export default function MobileMenu({
               })
             ) : (
               <div style={{ color: "red", padding: "20px", backgroundColor: "white" }}>
-                No navigation items found!
+                لم يتم العثور على عناصر التنقل!
               </div>
             )}
           </nav>

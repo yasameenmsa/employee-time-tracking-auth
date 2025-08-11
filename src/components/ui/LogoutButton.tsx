@@ -38,7 +38,7 @@ export default function LogoutButton({
         router.push('/login');
         router.refresh(); // Force a refresh to clear any cached data
       } else {
-        console.error('Logout failed');
+        console.error('فشل في تسجيل الخروج');
         alert('فشل في تسجيل الخروج. يرجى المحاولة مرة أخرى.');
       }
     } catch (error) {
