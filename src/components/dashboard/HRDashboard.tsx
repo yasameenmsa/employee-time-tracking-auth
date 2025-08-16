@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Users, FileText, DollarSign, Calendar, Clock, UserCheck, TrendingUp, AlertCircle } from 'lucide-react';
+import { Users, FileText, DollarSign, Calendar, UserCheck, TrendingUp, AlertCircle } from 'lucide-react';
 import LogoutButton from '@/components/ui/LogoutButton';
 
 interface User {

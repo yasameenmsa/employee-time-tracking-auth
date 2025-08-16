@@ -19,29 +19,40 @@ export default function TimeTrackingPage() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
   const checkAuth = async () => {
     try {
-      const response = await fetch('/api/auth/me');
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setError('Please log in to access this page');
+        setLoading(false);
+        return;
+      }
+
+      const response = await fetch('/api/auth/verify', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
       if (response.ok) {
         const userData = await response.json();
         setUser(userData.user);
       } else {
-        // User not authenticated, redirect to login
-        router.push('/login');
-        return;
+        setError('Authentication failed');
+        localStorage.removeItem('token');
       }
     } catch (err) {
       setError('Failed to verify authentication');
-      router.push('/login');
-      return;
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+
 
   if (loading) {
     return (

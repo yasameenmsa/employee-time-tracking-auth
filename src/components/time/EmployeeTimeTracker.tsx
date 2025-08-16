@@ -33,12 +33,6 @@ export default function EmployeeTimeTracker({ userId, userName }: EmployeeTimeTr
     return () => clearInterval(timer);
   }, []);
 
-  // Load employee status and entries
-  useEffect(() => {
-    loadEmployeeStatus();
-    loadTimeEntries();
-  }, [selectedDate]);
-
   const loadEmployeeStatus = async () => {
     try {
       const response = await fetch(`/api/time/status?date=${selectedDate}`);
@@ -68,6 +62,12 @@ export default function EmployeeTimeTracker({ userId, userName }: EmployeeTimeTr
       setError('Failed to load time entries');
     }
   };
+
+  // Load employee status and entries
+  useEffect(() => {
+    loadEmployeeStatus();
+    loadTimeEntries();
+  }, [selectedDate, loadEmployeeStatus, loadTimeEntries]);
 
   const handleClockIn = async () => {
     setLoading(true);
@@ -256,7 +256,7 @@ export default function EmployeeTimeTracker({ userId, userName }: EmployeeTimeTr
                 {loading ? (
                   <RefreshCw className="w-4 h-4 animate-spin mx-auto" />
                 ) : (
-                  status.status === 'clocked-in' ? 'تسجيل الخروج' : 'تسجيل الدخول'
+                  status.status === 'clocked-in' ? 'تسجيل الانصراف' : 'تسجيل الحضور'
                 )}
               </button>
             </div>

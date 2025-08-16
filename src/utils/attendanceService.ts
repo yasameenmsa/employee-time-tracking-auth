@@ -293,6 +293,7 @@ export class AttendanceService {
         employee_id: user._id.toString(),
         employee_name: user.name || user.email,
         employee_email: user.email,
+        username: user.username,
         department: user.department,
         current_status,
         today_hours: todayRecord?.total_hours || 0,

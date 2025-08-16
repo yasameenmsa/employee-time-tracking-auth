@@ -232,7 +232,7 @@ export default function AttendanceWidget({ employeeId, className = '' }: Attenda
             ) : (
               <XCircle className="h-5 w-5" />
             )}
-            تسجيل الخروج
+            تسجيل الانصراف
           </button>
         ) : (
           <button
@@ -250,7 +250,7 @@ export default function AttendanceWidget({ employeeId, className = '' }: Attenda
             ) : (
               <CheckCircle className="h-5 w-5" />
             )}
-            تسجيل الدخول
+           تسجيل الحضور
           </button>
         )}
       </div>
@@ -271,7 +271,7 @@ export default function AttendanceWidget({ employeeId, className = '' }: Attenda
               backgroundColor: state.isCheckedIn ? themeStyles.colors.success : themeStyles.colors.textSecondary
             }}
           ></div>
-          {state.isCheckedIn ? 'مسجل الدخول' : 'مسجل الخروج'}
+          {state.isCheckedIn ? 'مسجل الحضور' : 'مسجل الانصراف'}
         </div>
       </div>
 

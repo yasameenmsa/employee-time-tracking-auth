@@ -59,6 +59,7 @@ export interface EmployeeAttendanceSummary {
   employee_id: string;
   employee_name: string;
   employee_email: string;
+  username?: string;
   department?: string;
   current_status: 'checked_in' | 'checked_out';
   today_hours: number;

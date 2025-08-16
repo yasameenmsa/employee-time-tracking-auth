@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 import { getDatabase } from './mongodb';
-import { TimeEntry, TimeEntryResponse, TimeEntryFilters, EmployeeSettings, EmployeeSettingsResponse } from '@/types/timeEntry';
+import { TimeEntry, TimeEntryResponse, TimeEntryFilters, EmployeeSettingsResponse } from '@/types/timeEntry';
 
 export class TimeEntryService {
   static async getTimeEntriesCollection() {
@@ -132,7 +132,7 @@ export class TimeEntryService {
   static async getTimeEntries(filters: TimeEntryFilters = {}): Promise<{ entries: TimeEntryResponse[], total: number }> {
     const collection = await this.getTimeEntriesCollection();
     
-    const query: any = {};
+    const query: Record<string, string | { $regex: string, $options: string } | { $gte?: string, $lte?: string }> = {};
     
     if (filters.employeeId) {
       query.employeeId = filters.employeeId;
@@ -216,7 +216,7 @@ export class TimeEntryService {
   static async setEmployeeHourlyRate(employeeId: string, hourlyRate: number): Promise<EmployeeSettingsResponse> {
     const collection = await this.getEmployeeSettingsCollection();
     
-    const result = await collection.updateOne(
+    await collection.updateOne(
       { employeeId },
       {
         $set: {
@@ -275,7 +275,7 @@ export class TimeEntryService {
       throw new Error('Time entry not found');
     }
 
-    const updateData: any = {
+    const updateData: Record<string, number | string | Date> = {
       ...updates,
       updatedAt: new Date()
     };

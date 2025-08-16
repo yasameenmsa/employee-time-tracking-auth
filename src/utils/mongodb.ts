@@ -7,13 +7,7 @@ const options = {};
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
-// Function to check MongoDB URI and throw error at runtime
-function ensureMongoUri(): string {
-  if (!uri) {
-    throw new Error('Please add your MongoDB URI to .env.local');
-  }
-  return uri;
-}
+
 
 // Initialize client promise only when MongoDB URI is available
 if (uri) {

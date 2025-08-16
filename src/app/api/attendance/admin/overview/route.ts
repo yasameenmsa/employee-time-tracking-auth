@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
     const { role } = authResult.payload;
 
     // Check if user has admin or HR privileges
-    if (role !== 'admin' && role !== 'hr') {
+    if (role !== 'admin' && role !== 'HR') {
       return NextResponse.json(
         { success: false, error: 'Access denied. Admin or HR privileges required' } as AttendanceError,
         { status: 403 }

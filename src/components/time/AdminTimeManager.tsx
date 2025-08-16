@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Search, Filter, Edit, Trash2, DollarSign, Users, Calendar, RefreshCw, Settings } from 'lucide-react';
-import { TimeEntryResponse, EmployeeSettingsResponse } from '@/types/timeEntry';
+import { TimeEntry, TimeEntryResponse, EmployeeSettingsResponse } from '@/types/timeEntry';
 
 interface AdminTimeManagerProps {
   userId: string;
@@ -31,11 +31,6 @@ export default function AdminTimeManager({ userId, userName }: AdminTimeManagerP
   const [editingEntry, setEditingEntry] = useState<TimeEntryResponse | null>(null);
   const [newHourlyRate, setNewHourlyRate] = useState('');
   const [selectedEmployeeForRate, setSelectedEmployeeForRate] = useState('');
-
-  useEffect(() => {
-    loadTimeEntries();
-    loadEmployeeSettings();
-  }, [currentPage, searchTerm, startDate, endDate, selectedEmployeeId]);
 
   const loadTimeEntries = async () => {
     setLoading(true);
@@ -77,7 +72,12 @@ export default function AdminTimeManager({ userId, userName }: AdminTimeManagerP
     }
   };
 
-  const handleUpdateEntry = async (entryId: string, updates: any) => {
+  useEffect(() => {
+    loadTimeEntries();
+    loadEmployeeSettings();
+  }, [currentPage, searchTerm, startDate, endDate, selectedEmployeeId, loadTimeEntries, loadEmployeeSettings]);
+
+  const handleUpdateEntry = async (entryId: string, updates: Partial<Pick<TimeEntry, 'clockIn' | 'clockOut' | 'hourlyRate'>>) => {
     try {
       const response = await fetch('/api/time/entries', {
         method: 'PUT',
